@@ -1,0 +1,74 @@
+{
+  "$schema": "https://rasa-os.github.io/schema/rasa.schema.v1.json",
+  "contract_version": "1.3.0",
+  "name": "rasa.core",
+  "version": "0.1.0",
+  "kind": "core",
+  "aliases": [
+    "core",
+    "rasa-core"
+  ],
+  "description": "RasaOS · Core. The singleton L1 shared foundation every domain + orchestrator Element depends on. Per canon Spec §6: 'exactly one — rasa.core (dotted name rasa.core, no .identifier suffix). The shared bones every domain and orchestrator depends on. Vocabulary, output styles, stamp definitions, common rules. First-party-only.'\n\nv0.1.0 is the canon-shaped Phase 1 SHELL — content/ subdirs exist but are empty scaffolds. Phase 2 (separate session) will extract universal content from rasa.domain.code (vocabulary, output-styles, stamps, task-rules, craft-rules, etc.) into this Element's content/, then update rasa.domain.code + rasa.domain.legal + future domain/orchestrator Elements to declare requires.elements: [rasa.core].\n\nSingleton per canon. The name regex (Spec §3) has an exception clause: 'OR be exactly rasa.core / rasa.kernel (the two singletons).' rasa.core has no .identifier suffix.",
+  "source": {
+    "repo": "https://github.com/RasaOS/core",
+    "branch": "main"
+  },
+  "tier": "Pro",
+  "capabilities": [],
+  "permissions": [
+    "fs:write",
+    "shell:exec"
+  ],
+  "requires": {},
+  "rasa": {
+    "role": "L1-shared-foundation-singleton",
+    "shape_pattern": "agnostic",
+    "conforms_to": "rasa.domain.core@v1.0.0",
+    "singleton": true,
+    "note": "rasa.core is one of two canon singletons (rasa.core + rasa.kernel) — no .identifier suffix in the name. Per canon Spec §6 kinds table: 'Exactly one: core (dotted name rasa.core). The shared bones every domain and orchestrator depends on.' The Element structurally resembles a domain (per canon §6 kind-specific shape variation: 'core: same shape as domain/orchestrator, no requires.elements (it depends on nothing).'); v0.1.0 conforms_to declares we used the rasa.domain.core template as the structural baseline. rasa.shape_pattern='agnostic' since content/ shape is determined by what gets extracted from domain-code in Phase 2."
+  },
+  "element": {
+    "description": "Files mirrored into the install target per canon ELEMENT_CONTRACT.md §7. v0.1.0 ships all as opt-in scaffold — registered for check-manifest coverage but not installed automatically. Phase 2 will populate skills/, rules/, agents/ with extracted-from-domain-code universal content, then change policies to directory-mirror.",
+    "files": [
+      {
+        "from": "content/skills/",
+        "to": ".claude/skills/",
+        "policy": "opt-in",
+        "note": "Universal skills (Phase 2 extraction target: any skill from domain-code that's NOT engineering-specific — e.g., audit, save, handoff, stamp helpers)."
+      },
+      {
+        "from": "content/rules/",
+        "to": ".claude/",
+        "policy": "opt-in",
+        "note": "Universal rules (Phase 2 extraction target: task-rules, craft-rules, vocabulary.md, stamps.md from domain-code)."
+      },
+      {
+        "from": "content/agents/",
+        "to": ".claude/agents/",
+        "policy": "opt-in",
+        "note": "Universal Claude subagent definitions (Phase 2 extraction target: code-reviewer, doc-scanner if generic enough — or skip if too engineering-specific)."
+      }
+    ]
+  },
+  "seed": {
+    "description": "One-time files copied at install only. Per canon ELEMENT_CONTRACT.md §7.",
+    "files": [
+      {
+        "from": "seed/CLAUDE.md.template",
+        "to": "CLAUDE.md",
+        "policy": "skip-if-exists",
+        "note": "Per-project Claude session contract. Placeholder-free."
+      },
+      {
+        "from": "seed/rasa.lock.json.template",
+        "to": ".claude/rasa.lock.json",
+        "policy": "init-only-with-sha",
+        "note": "Stamped with the Element HEAD commit SHA at init time. Lockfile shape per canon Spec §6."
+      }
+    ]
+  },
+  "scaffold": {
+    "description": "Empty directories created at init. v0.1.0 ships none — Phase 2 will populate scaffold as content extraction lands.",
+    "directories": []
+  }
+}

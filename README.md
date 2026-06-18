@@ -74,7 +74,7 @@ From `rasa.domain.code/content/`:
 - **`vocabulary.md`** → universal (kit term definitions; should be canon-cited not duplicated)
 - **`output-rules.md` + `output-styles.md`** → universal (34 output templates)
 - **`stamps.md`** → universal (YAML frontmatter schemas)
-- **`task-rules.md`** → mostly universal (engineering-flavored examples; could generalize)
+- ~~**`task-rules.md`** → mostly universal (engineering-flavored examples; could generalize)~~ **SUPERSEDED 2026-06-18** — task management shipped as the opt-in Element `rasa.module.tasks` (the first `module`-kind Element), distilled from domain-code with a domain-defined done-gate. It is NOT core content: core is mandatory-for-all, and task management is opt-in per parent. See `~/rAI/rasa-os/elements/module-tasks/`.
 - **`craft-rules.md`** → universal (build-it-right discipline)
 - **`environment-rules.md`** → universal (env-var stamp model)
 - **Skills folder candidates:** `audit/`, `save/`, `handoff/`, `bookmarks/`, `glossary/`, `peer-review/`, `stuck/` — review case-by-case

@@ -8,7 +8,7 @@
     "core",
     "rasa-core"
   ],
-  "description": "RasaOS · Core. The singleton L1 shared foundation every domain + orchestrator Element depends on. Per canon Spec §6: 'exactly one — rasa.core (dotted name rasa.core, no .identifier suffix). The shared bones every domain and orchestrator depends on. Vocabulary, output styles, stamp definitions, common rules. First-party-only.'\n\nv0.1.0 is the canon-shaped Phase 1 SHELL — content/ subdirs exist but are empty scaffolds. Phase 2 (separate session) will extract universal content from rasa.domain.code (vocabulary, output-styles, stamps, task-rules, craft-rules, etc.) into this Element's content/, then update rasa.domain.code + rasa.domain.legal + future domain/orchestrator Elements to declare requires.elements: [rasa.core].\n\nSingleton per canon. The name regex (Spec §3) has an exception clause: 'OR be exactly rasa.core / rasa.kernel (the two singletons).' rasa.core has no .identifier suffix.",
+  "description": "RasaOS · Core. The singleton L1 shared foundation every domain + orchestrator Element depends on. Per canon Spec §6: 'exactly one — rasa.core (dotted name rasa.core, no .identifier suffix). The shared bones every domain and orchestrator depends on. Vocabulary, output styles, stamp definitions, common rules. First-party-only.'\n\nv0.1.0 is the canon-shaped Phase 1 SHELL — content/ subdirs exist but are empty scaffolds. Phase 2 (separate session) will extract universal content from rasa.domain.code (vocabulary, output-styles, stamps, craft-rules, etc.) into this Element's content/, then update rasa.domain.code + rasa.domain.legal + future domain/orchestrator Elements to declare requires.elements: [rasa.core]. (task-rules was removed from this list 2026-06-18 — task management shipped as the opt-in Element rasa.module.tasks, not core content.)\n\nSingleton per canon. The name regex (Spec §3) has an exception clause: 'OR be exactly rasa.core / rasa.kernel (the two singletons).' rasa.core has no .identifier suffix.",
   "source": {
     "repo": "https://github.com/RasaOS/core",
     "branch": "main"
@@ -40,7 +40,7 @@
         "from": "content/rules/",
         "to": ".claude/",
         "policy": "opt-in",
-        "note": "Universal rules (Phase 2 extraction target: task-rules, craft-rules, vocabulary.md, stamps.md from domain-code)."
+        "note": "Universal rules (Phase 2 extraction target: craft-rules, vocabulary.md, stamps.md from domain-code). NOTE: task-rules was removed from this list 2026-06-18 — task management shipped as the opt-in Element rasa.module.tasks, not core content."
       },
       {
         "from": "content/agents/",

@@ -34,9 +34,14 @@ check-manifest coverage, but ship no actual files yet.
 **Phase 2** (separate dedicated session, not started) will:
 
 1. Extract universal content from `rasa.domain.code/content/`
-   (vocabulary, output-styles, stamps, task-rules, craft-rules,
+   (vocabulary, output-styles, stamps, craft-rules,
    environment-rules, and audit/save/handoff/glossary skills — case
-   by case) into this Element's content/
+   by case) into this Element's content/.
+   **NOTE (2026-06-18):** `task-rules` was REMOVED from this list — task
+   management shipped instead as the opt-in Element `rasa.module.tasks`
+   (first `module`-kind Element). It is not core content: core is
+   mandatory-for-all; task management is opt-in per parent via
+   `requires.elements[]`. See `elements/module-tasks/`.
 2. Bump rasa.json#element.files[] policies from `opt-in` to
    `directory-mirror` for populated subdirs
 3. Bump rasa.core → v0.2.0 (minor — new content categories)

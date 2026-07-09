@@ -2,7 +2,7 @@
   "$schema": "https://rasa-os.github.io/schema/rasa.schema.v1.json",
   "contract_version": "1.3.0",
   "name": "rasa.core",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "kind": "core",
   "aliases": [
     "core",
@@ -25,7 +25,13 @@
     "shape_pattern": "agnostic",
     "conforms_to": "rasa.domain.core@v1.0.0",
     "singleton": true,
-    "note": "rasa.core is one of two canon singletons (rasa.core + rasa.kernel) — no .identifier suffix in the name. Per canon Spec §6 kinds table: 'Exactly one: core (dotted name rasa.core). The shared bones every domain and orchestrator depends on.' The Element structurally resembles a domain (per canon §6 kind-specific shape variation: 'core: same shape as domain/orchestrator, no requires.elements (it depends on nothing).'); v0.1.0 conforms_to declares we used the rasa.domain.core template as the structural baseline. rasa.shape_pattern='agnostic' since content/ shape is determined by what gets extracted from domain-code in Phase 2."
+    "note": "rasa.core is one of two canon singletons (rasa.core + rasa.kernel) — no .identifier suffix in the name. Per canon Spec §6 kinds table: 'Exactly one: core (dotted name rasa.core). The shared bones every domain and orchestrator depends on.' The Element structurally resembles a domain (per canon §6 kind-specific shape variation: 'core: same shape as domain/orchestrator, no requires.elements (it depends on nothing).'); v0.1.0 conforms_to declares we used the rasa.domain.core template as the structural baseline. rasa.shape_pattern='agnostic' since content/ shape is determined by what gets extracted from domain-code in Phase 2.",
+    "identity": {
+      "one_liner": "the RasaOS L1 shared foundation every Element depends on",
+      "role": "core",
+      "subject": "the shared L1 foundation — vocabulary, output styles, common rules",
+      "goal": "bring the shared L1 foundation — vocabulary, output styles, common rules into a project as an installable RasaOS core"
+    }
   },
   "element": {
     "description": "Files mirrored into the install target per canon ELEMENT_CONTRACT.md §7. v0.1.0 ships all as opt-in scaffold — registered for check-manifest coverage but not installed automatically. Phase 2 will populate skills/, rules/, agents/ with extracted-from-domain-code universal content, then change policies to directory-mirror.",
@@ -76,6 +82,12 @@
         "to": ".claude/rasa.lock.json",
         "policy": "init-only-with-sha",
         "note": "Stamped with the Element HEAD commit SHA at init time. Lockfile shape per canon Spec §6."
+      },
+      {
+        "from": "seed/rasa-deployment.md.template",
+        "to": ".claude/rasa-deployment.md",
+        "policy": "skip-if-exists",
+        "note": "The DEPLOYMENT identity layer (SA-025) — project-owned; what this project is, for whom, on what platform. bin/init generates the element layer (.claude/rasa-identity.md) from rasa.identity every install."
       }
     ]
   },
